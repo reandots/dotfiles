@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eu
+
+ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/dropbox"
+
+mkdir -p "$ROOT"
+
+exec env \
+    HOME="$ROOT" \
+    /usr/bin/dropbox start --install "$@"
