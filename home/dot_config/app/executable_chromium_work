@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# ─── Settings ────────────────────────────────────────────────
+PROFILE_DIR="${HOME}/.config/chromium_group/chromium_work"
+CACHE_DIR="${HOME}/.cache/chromium_group/chromium_work"
+TIMEZONE="Europe/Moscow"
+LANG_TAG="en-US"
+# ──────────────────────────────────────────────────────────────
+
+mkdir -p "$PROFILE_DIR" "$CACHE_DIR"
+
+# ──────────────────────────────────────────────────────────────
+CHROMIUM_FLAGS=(
+    --user-data-dir="${PROFILE_DIR}"
+    --disk-cache-dir="${CACHE_DIR}"
+    --proxy-bypass-list="localhost,127.0.0.1,[::1]"
+    --lang="${LANG_TAG}"
+    --accept-lang="ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+    --class="chromium_work"
+    # disable main profile sync
+    --disable-sync
+    --test-type
+    --disable-background-networking
+    --no-default-browser-check
+    --no-first-run
+    --restore-last-session
+)
+
+# ──────────────────────────────────────────────────────────────
+export TZ="${TIMEZONE}"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+exec /usr/bin/chromium "${CHROMIUM_FLAGS[@]}" "$@"
