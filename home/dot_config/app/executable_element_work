@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# ─── Settings ────────────────────────────────────────────────
+export LINK_BROWSER=chromium_work
+export LINK_FILTER=labpro.local
+PROFILE_DIR="${HOME}/.local/share/labpro"
+# ──────────────────────────────────────────────────────────────
+
+mkdir -p "$PROFILE_DIR"
+
+# ──────────────────────────────────────────────────────────────
+
+exec element-desktop --profile-dir "${PROFILE_DIR}" --ignore-certificate-errors "$@"
