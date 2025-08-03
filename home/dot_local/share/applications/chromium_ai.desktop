@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Chromium AI
+GenericName=Web Browser AI
+Comment=Access the Internet AI
+Exec=/home/rean/.config/app/chromium_ai %U
+StartupNotify=true
+Terminal=false
+Icon=chromium
+Type=Application
+StartupWMClass=chromium_ai
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/chromium;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New AI Window
+Exec=/home/rean/.config/app/chromium_ai %U
+
+[Desktop Action new-private-window]
+Name=New Incognito AI Window
+Exec=/home/rean/.config/app/chromium_ai --incognito %U
