@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Chromium Pay
+GenericName=Web Browser Pay
+Comment=Access the Internet Pay
+Exec=/home/rean/.config/app/chromium_pay %U
+StartupNotify=true
+Terminal=false
+Icon=chromium
+Type=Application
+StartupWMClass=chromium_pay
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/chromium;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New Pay Window
+Exec=/home/rean/.config/app/chromium_pay %U
+
+[Desktop Action new-private-window]
+Name=New Incognito Pay Window
+Exec=/home/rean/.config/app/chromium_pay --incognito %U
