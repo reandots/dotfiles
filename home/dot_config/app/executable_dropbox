@@ -7,4 +7,4 @@ mkdir -p "$ROOT"
 
 exec env \
     HOME="$ROOT" \
-    /usr/bin/dropbox start --install "$@"
+    /usr/bin/dropbox start -i "$@"
