@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+/usr/bin/google-chrome-stable --password-store=basic "$@"
