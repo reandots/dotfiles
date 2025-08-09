@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export CHROME_EXECUTABLE=vs_code_chrome
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
+
+exec /usr/bin/code --extensions-dir ~/.local/share/vscode "$@"
