@@ -6,7 +6,7 @@ GenericName[ru]=Веб-браузер
 Comment=Access the Internet
 Comment[ru]=Доступ в Интернет
 StartupWMClass=Google-chrome
-Exec=/home/rean/.config/app/google-chrome-stable %U
+Exec=/home/rean/.config/app/google_chrome_stable %U
 StartupNotify=true
 Terminal=false
 Icon=google-chrome
@@ -19,10 +19,10 @@ Actions=new-window;new-private-window;
 Name=New Window
 Name[ru]=Новое окно
 StartupWMClass=Google-chrome
-Exec=/home/rean/.config/app/google-chrome-stable
+Exec=/home/rean/.config/app/google_chrome_stable
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
 Name[ru]=Новое окно в режиме инкогнито
 StartupWMClass=Google-chrome
-Exec=/home/rean/.config/app/google-chrome-stable --incognito
+Exec=/home/rean/.config/app/google_chrome_stable --incognito
