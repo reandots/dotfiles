@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # ─── Settings ────────────────────────────────────────────────
 export LINK_BROWSER=chromium_work
 export LINK_FILTER=labpro.local
