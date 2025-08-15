@@ -1,0 +1,10 @@
+--hidden
+--follow
+--glob=!.git
+--glob=!/proc/*
+--glob=!/sys/*
+--glob=!/dev/*
+--glob=!/run/*
+--glob=!/mnt/*
+--glob=!/nix/*
+--glob=!/var/run/*
