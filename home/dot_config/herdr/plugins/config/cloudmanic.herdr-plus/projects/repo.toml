@@ -1,0 +1,37 @@
+name = "repo"
+group = "Work"
+
+working_dir = "~/projects/work/productb/repo"
+
+[[tabs]]
+name = "repo"
+
+[[tabs.panes]]
+working_dir = "core"
+label = "core"
+
+[[tabs.panes]]
+working_dir = "core/logs"
+label = "logs"
+split = "down"
+ratio = 0.5
+
+[[tabs.panes]]
+working_dir = "plugin/http_proxy"
+label = "http_proxy"
+split = "right"
+ratio = 0.5
+
+
+[[tabs]]
+name = "manifest"
+
+[[tabs.panes]]
+working_dir = "."
+label = "repo"
+
+[[tabs.panes]]
+working_dir = "manifest"
+label = "manifest"
+split = "down"
+ratio = 0.5

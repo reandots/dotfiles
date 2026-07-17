@@ -1,0 +1,11 @@
+name = "herdr"
+group = "Home"
+
+working_dir = "~/.config/herdr"
+
+[[tabs]]
+name = "cfg"
+
+[[tabs]]
+name = "projects"
+working_dir = "~/.config/herdr/plugins/config/cloudmanic.herdr-plus/projects"

@@ -1,0 +1,8 @@
+*.log
+.plugins.lock
+plugins.json
+session.json
+session-snapshots
+session-snapshots/**
+plugins/github
+plugins/github/**

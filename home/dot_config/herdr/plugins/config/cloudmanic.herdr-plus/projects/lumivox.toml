@@ -1,0 +1,7 @@
+name = "lumivox"
+group = "Home"
+
+working_dir = "~/projects/lumivox_ai"
+
+[[tabs]]
+name = "lumivox"

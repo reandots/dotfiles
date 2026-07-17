@@ -1,0 +1,66 @@
+onboarding = false
+[ui]
+agent_panel_sort = "priority"
+
+status_indicators = "symbols"
+[theme]
+name = "terminal"
+auto_switch = false
+
+[theme.custom]
+# Herdr also uses panel_bg as the foreground on accent-colored active tabs.
+panel_bg = "#002b36"
+# Solarized surface from Kitty; avoid color8 matching the foreground.
+active_row_bg = "#073642"
+# Copy-mode search matches use surface1; terminal color8 equals the text color.
+surface1 = "#073642"
+
+[keys]
+# Alt+M prefix with US/RU aliases.
+prefix = ["alt+m", "alt+ь", "alt+Ь"]
+toggle_sidebar = ["prefix+b", "prefix+и"]
+copy_mode = ["prefix+c", "prefix+с"]
+# Spaces are selected in the navigator popup, not the sidebar.
+workspace_picker = ""
+# Direct terminal-mode bindings.
+switch_tab = "alt+1..9"
+split_vertical = "alt+\\"
+split_horizontal = "alt+minus"
+# US/RU aliases; accept both base and shifted Cyrillic key representations.
+new_tab = ["ctrl+shift+t", "ctrl+shift+е", "ctrl+shift+Е"]
+zoom = ["ctrl+shift+x", "ctrl+shift+ч", "ctrl+shift+Ч"]
+focus_pane_left = "ctrl+left"
+focus_pane_right = "ctrl+right"
+focus_pane_up = "ctrl+up"
+focus_pane_down = "ctrl+down"
+close_pane = ["ctrl+shift+w", "ctrl+shift+ц", "ctrl+shift+Ц"]
+
+[[keys.command]]
+key = ["ctrl+shift+p", "ctrl+shift+з", "ctrl+shift+З"]
+type = "plugin_action"
+command = "cloudmanic.herdr-plus.projects"
+description = "Projects"
+
+[[keys.command]]
+key = ["prefix+w", "prefix+ц"]
+type = "plugin_action"
+command = "beyondlex.herdr-recent-navigator.focus-workspaces"
+description = "Navigator: Spaces"
+
+[[keys.command]]
+key = ["prefix+t", "prefix+е"]
+type = "plugin_action"
+command = "beyondlex.herdr-recent-navigator.focus-tabs"
+description = "Navigator: Tabs"
+
+[[keys.command]]
+key = ["prefix+a", "prefix+ф"]
+type = "plugin_action"
+command = "beyondlex.herdr-recent-navigator.focus-agents"
+description = "Navigator: Agents"
+
+[[keys.command]]
+key = ["prefix+u", "prefix+г"]
+type = "plugin_action"
+command = "beyondlex.herdr-recent-navigator.focus-panes"
+description = "Navigator: Panes"
