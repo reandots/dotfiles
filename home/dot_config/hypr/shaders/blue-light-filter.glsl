@@ -4,7 +4,9 @@ precision highp float;
 varying vec2 v_texcoord;
 uniform sampler2D tex;
 
+// Цветовая температура в кельвинах; меньшие значения дают более тёплый оттенок
 const float temperature = 4000.0;
+// Сила смешивания с исходным изображением: 0 отключает эффект, 1 применяет полностью
 const float temperatureStrength = 0.5;
 
 #define WithQuickAndDirtyLuminancePreservation
