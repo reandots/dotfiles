@@ -8,12 +8,12 @@ import sys
 import time
 
 
-def dispatch(command):
+def dispatch(lua):
     path = Path(os.environ["XDG_RUNTIME_DIR"]) / "hypr" / os.environ["HYPRLAND_INSTANCE_SIGNATURE"] / ".socket.sock"
     with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
         connection.settimeout(2)
         connection.connect(str(path))
-        connection.sendall(f"dispatch {command}".encode())
+        connection.sendall(f"dispatch {lua}".encode())
         response = connection.recv(4096).decode().strip()
         if response != "ok":
             raise RuntimeError(response)
@@ -28,7 +28,7 @@ def slide(address, x, start_y, end_y, showing):
         # При показе замедляемся к концу, при скрытии плавно набираем скорость.
         eased = 1 - (1 - progress) ** 3 if showing else progress ** 3
         y = round(start_y + (end_y - start_y) * eased)
-        dispatch(f"movewindowpixel exact {x} {y},address:{address}")
+        dispatch(f"hl.dsp.window.move({{ x = {x}, y = {y}, window = 'address:{address}' }})")
         if progress == 1:
             break
         frame += 1

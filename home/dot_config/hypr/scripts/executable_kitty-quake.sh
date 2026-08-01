@@ -9,9 +9,13 @@ client() {
     hyprctl -j clients | jq -c 'first(.[] | select(.class == "kitty-quake")) // empty'
 }
 
+dispatch() {
+    hyprctl dispatch "$1" >/dev/null
+}
+
 window=$(client)
 if [[ -z $window ]]; then
-    hyprctl dispatch exec 'kitty --class kitty-quake --title Quake' >/dev/null
+    hyprctl dispatch 'hl.dsp.exec_cmd("kitty --class kitty-quake --title Quake")' >/dev/null
     for ((i = 0; i < 100; i++)); do
         window=$(client)
         [[ -n $window ]] && break
@@ -34,7 +38,7 @@ if [[ $window_workspace == "$workspace" ]]; then
     hidden_y=$(jq -r --argjson height "$height" '.y - $height - 20' <<<"$monitor")
     # Сначала уводим окно за верхний край, затем прячем без завершения задач.
     python3 "$slide_script" "$address" "$x" "$y" "$hidden_y" hide
-    hyprctl dispatch movetoworkspacesilent "special:quake,address:$address" >/dev/null
+    dispatch "hl.dsp.window.move({ workspace = 'special:quake', follow = false, window = 'address:$address' })"
     exit 0
 fi
 
@@ -50,6 +54,6 @@ read -r x y width height < <(jq -r '
 
 hidden_y=$(jq -r --argjson height "$height" '.y - $height - 20' <<<"$monitor")
 # Подготавливаем скрытое окно за верхним краем, чтобы оно не мелькнуло при показе.
-hyprctl --batch "dispatch resizewindowpixel exact $width $height,address:$address; dispatch movewindowpixel exact $x $hidden_y,address:$address; dispatch movetoworkspacesilent $workspace,address:$address; dispatch movewindowpixel exact $x $hidden_y,address:$address; dispatch alterzorder top,address:$address" >/dev/null
+hyprctl --batch "dispatch hl.dsp.window.resize({ x = $width, y = $height, window = 'address:$address' }); dispatch hl.dsp.window.move({ x = $x, y = $hidden_y, window = 'address:$address' }); dispatch hl.dsp.window.move({ workspace = '$workspace', follow = false, window = 'address:$address' }); dispatch hl.dsp.window.move({ x = $x, y = $hidden_y, window = 'address:$address' }); dispatch hl.dsp.window.alter_zorder({ mode = 'top', window = 'address:$address' })" >/dev/null
 python3 "$slide_script" "$address" "$x" "$hidden_y" "$y" show
-hyprctl dispatch focuswindow "address:$address" >/dev/null
+dispatch "hl.dsp.focus({ window = 'address:$address' })"
