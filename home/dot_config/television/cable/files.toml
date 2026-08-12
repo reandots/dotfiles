@@ -1,0 +1,40 @@
+[metadata]
+name = "files"
+description = "A channel to select files and directories"
+requirements = ["fd", "bat", "realpath", "bash", "file", "chafa", "pdftotext", "ffprobe", "bsdtar", "7z"]
+
+[source]
+command = [
+  { name = "Default", run = "fd --type f --hidden --exclude .git" },
+  { name = "Symlink", run = "fd --type f --follow --hidden --exclude .git" },
+  # Include ignored files and .git as a last-resort search.
+  { name = "All", run = "fd --type f --follow --hidden --no-ignore" },
+]
+
+[preview]
+# Quote embedded apostrophes before passing the path through bash.
+command = """bash "$HOME/.config/television/files-preview.sh" '{replace:s/'/'"'"'/g}'"""
+shell = "bash"
+env = { BAT_THEME = "ansi" }
+
+[keybindings]
+shortcut = "f1"
+ctrl-o = "actions:edit"
+alt-enter = "actions:absolute_path"
+ctrl-up = "actions:goto_parent_dir"
+
+[actions.edit]
+description = "Open selected files in micro, otherwise $EDITOR or nano"
+command = "if command -v micro >/dev/null 2>&1; then micro {}; else ${EDITOR:-nano} {}; fi"
+shell = "bash"
+mode = "execute"
+
+[actions.absolute_path]
+description = "Output absolute paths without resolving symlinks and exit"
+command = "realpath --no-symlinks -- {}"
+mode = "execute"
+
+[actions.goto_parent_dir]
+description = "Re-opens tv in the parent directory"
+command = "tv files .."
+mode = "execute"
