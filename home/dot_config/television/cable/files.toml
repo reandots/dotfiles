@@ -7,7 +7,6 @@ requirements = ["fd", "bat", "realpath", "bash", "file", "chafa", "pdftotext", "
 command = [
   { name = "Default", run = "fd --type f --hidden --exclude .git" },
   { name = "Symlink", run = "fd --type f --follow --hidden --exclude .git" },
-  # Include ignored files and .git as a last-resort search.
   { name = "All", run = "fd --type f --follow --hidden --no-ignore" },
 ]
 
