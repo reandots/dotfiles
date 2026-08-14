@@ -1,0 +1,44 @@
+[metadata]
+name = "text"
+description = "A channel to find and select text from files"
+requirements = ["rg", "bat", "realpath", "bash"]
+
+[source]
+command = [
+  { name = "Default", run = "rg . --hidden --glob '!.git' --no-heading --line-number --colors 'match:fg:white' --colors 'path:fg:blue' --color=always" },
+  { name = "Symlink", run = "rg . --follow --hidden --glob '!.git' --no-heading --line-number --colors 'match:fg:white' --colors 'path:fg:blue' --color=always" },
+  { name = "All", run = "rg . --follow --hidden --no-ignore --no-heading --line-number --colors 'match:fg:white' --colors 'path:fg:blue' --color=always" },
+]
+ansi = true
+output = "{strip_ansi|split:\\::..2}"
+
+[preview]
+command = "bat -n --color=always '{strip_ansi|split:\\::0}'"
+env = { BAT_THEME = "ansi" }
+offset = '{strip_ansi|split:\::1}'
+
+[ui]
+preview_panel = { header = '{strip_ansi|split:\::..2}' }
+
+[keybindings]
+shortcut = "f3"
+ctrl-o = "actions:edit"
+alt-enter = "actions:absolute_path"
+ctrl-up = "actions:goto_parent_dir"
+
+[actions.edit]
+description = "Open file at line in micro, otherwise $EDITOR or nano"
+command = "if command -v micro >/dev/null 2>&1; then micro '{strip_ansi|split:\\::0}' '+{strip_ansi|split:\\::1}'; else ${EDITOR:-nano} '+{strip_ansi|split:\\::1}' '{strip_ansi|split:\\::0}'; fi"
+shell = "bash"
+mode = "execute"
+
+[actions.absolute_path]
+description = "Output absolute file paths without resolving symlinks and exit"
+command = """realpath --no-symlinks -- {split:\\n:..|map:{strip_ansi|split:\\::0|replace:s/'/'"'"'/g|prepend:'|append:'}|join: }"""
+separator = "\n"
+mode = "execute"
+
+[actions.goto_parent_dir]
+description = "Re-opens tv text in the parent directory"
+command = "tv text .."
+mode = "execute"
