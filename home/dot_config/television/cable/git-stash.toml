@@ -1,0 +1,65 @@
+[metadata]
+name = "git-stash"
+description = "Browse and manage git stash entries"
+requirements = ["git"]
+
+[source]
+command = "git stash list --color=always"
+ansi = true
+output = "{strip_ansi|split:\\::0}"
+no_sort = true
+frecency = false
+
+[preview]
+command = "git stash show -p --color=always '{strip_ansi|split:\\::0}'"
+
+[ui]
+layout = "portrait"
+
+[keybindings]
+shortcut = "f5"
+alt-enter = "actions:apply"
+ctrl-p = "actions:pop"
+ctrl-d = "actions:drop"
+
+[actions.apply]
+description = "Apply the selected stash"
+command = '''
+stash='{strip_ansi|split:\::0}'
+if read -r -p "Apply $stash? [y/N] " reply; then
+  case "$reply" in
+    y|Y|yes|YES) git stash apply "$stash" ;;
+    *) printf 'Cancelled.\n' ;;
+  esac
+fi
+'''
+shell = "bash"
+mode = "execute"
+
+[actions.pop]
+description = "Pop the selected stash (apply and remove)"
+command = '''
+stash='{strip_ansi|split:\::0}'
+if read -r -p "Pop $stash (apply and remove)? [y/N] " reply; then
+  case "$reply" in
+    y|Y|yes|YES) git stash pop "$stash" ;;
+    *) printf 'Cancelled.\n' ;;
+  esac
+fi
+'''
+shell = "bash"
+mode = "execute"
+
+[actions.drop]
+description = "Drop the selected stash"
+command = '''
+stash='{strip_ansi|split:\::0}'
+if read -r -p "Drop $stash permanently? [y/N] " reply; then
+  case "$reply" in
+    y|Y|yes|YES) git stash drop "$stash" ;;
+    *) printf 'Cancelled.\n' ;;
+  esac
+fi
+'''
+shell = "bash"
+mode = "execute"
