@@ -1,0 +1,37 @@
+[metadata]
+name = "ports"
+description = "Inspect TCP listeners and signal a selected process"
+requirements = ["ss", "python3"]
+
+[source]
+command = 'python3 "$HOME/.config/television/ports.py" list'
+display = "{split:|:3}"
+no_sort = true
+frecency = false
+
+[preview]
+command = 'python3 "$HOME/.config/television/ports.py" info {split:|:0} {split:|:1} {split:|:2}'
+
+[ui.preview_panel]
+size = 50
+
+[keybindings]
+shortcut = "f7"
+enter = "actions:info"
+alt-enter = "actions:term"
+ctrl-k = "actions:kill"
+
+[actions.info]
+description = "Print listener and process details"
+command = 'python3 "$HOME/.config/television/ports.py" info {split:|:0} {split:|:1} {split:|:2}'
+mode = "execute"
+
+[actions.term]
+description = "Send SIGTERM to this process (with confirmation)"
+command = 'python3 "$HOME/.config/television/ports.py" term {split:|:0} {split:|:1} {split:|:2}'
+mode = "execute"
+
+[actions.kill]
+description = "Send SIGKILL to this process (with confirmation)"
+command = 'python3 "$HOME/.config/television/ports.py" kill {split:|:0} {split:|:1} {split:|:2}'
+mode = "execute"
