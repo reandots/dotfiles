@@ -1,0 +1,45 @@
+auto_sync = false
+update_check = false
+data_dir = "$XDG_DATA_HOME/atuin"
+
+# Интерактивный поиск по индексу в памяти демона.
+search_mode = "daemon-fuzzy"
+
+# Ctrl+0..9 — цифровые shortcuts Atuin вместо Alt+0..9 (Alt занят вкладками терминала).
+ctrl_n_shortcuts = true
+
+# Enter в Atuin — вернуть выбранную команду в Zsh для проверки и редактирования.
+enter_accept = false
+
+# Esc в Atuin — восстановить строку Zsh, которая была до открытия поиска.
+exit_mode = "return-original"
+
+# Не сохранять команды с секретами, распознанными встроенными шаблонами Atuin.
+secrets_filter = true
+
+# Сохранять и команды с ненулевым кодом завершения — для поиска и исправления.
+store_failed = true
+
+# Исключения по тексту команды: ^ и $ — границы всей строки; .* — любые аргументы.
+history_filter = [
+  '^gst$',
+  '^gfa$',
+  '^ggpull$',
+  '^g ph$',
+  '^git ph$',
+  '^g df$',
+  '^git df$',
+  '^g add[ \t]+.*$',
+  '^git add[ \t]+.*$',
+  '^ls$',
+  '^ll$',
+  '^pwd$',
+  '^exit$',
+  '^czs$',
+  '^cz add[ \t]+.*$',
+  '^make[ \t]+.*$',
+]
+
+[daemon]
+enabled = true
+autostart = true
