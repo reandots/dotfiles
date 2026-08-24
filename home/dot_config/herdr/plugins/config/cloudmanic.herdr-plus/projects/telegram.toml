@@ -1,7 +1,0 @@
-name = "telegram"
-group = "Home"
-
-working_dir = "~/projects/test/telegram"
-
-[[tabs]]
-name = "telegram"

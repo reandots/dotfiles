@@ -1,0 +1,18 @@
+name = "chezmoi"
+group = "Home"
+
+working_dir = "~/.config"
+
+[[tabs]]
+name = "chezmoi"
+working_dir = "~/.config"
+
+[[tabs.panes]]
+working_dir = "~/.config"
+label = "config"
+
+[[tabs.panes]]
+working_dir = "~/.local/share/chezmoi"
+label = "chezmoi"
+split = "right"
+ratio = 0.5
