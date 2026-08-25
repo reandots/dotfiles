@@ -1,8 +1,1 @@
-/proc
-/sys
-/dev
-/run
-/tmp
-/mnt
-/nix
-/var/run
+.git/
