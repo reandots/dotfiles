@@ -60,7 +60,7 @@ _enable_bracketed_paste() {
 }
 
 __tv_path_completion() {
-  local base lbuf suffix tail dir leftover matches
+  local base lbuf suffix tail dir leftover matches dirP item selected_path
   base=$1
   lbuf=$2
   suffix=""
@@ -77,12 +77,13 @@ __tv_path_completion() {
       zle -I
       matches=$(
         shift
-        # tv "$dir" --autocomplete-prompt "$lbuf" --inline --no-status-bar --input "$leftover" < /dev/tty | while read -r item; do
-        tv "$dir" --autocomplete-prompt "$lbuf" --ui-scale 50 --no-status-bar --input "$leftover" < /dev/tty | while read -r item; do
+        # Сохраняем пробелы в именах; экранируем весь путь, включая каталог.
+        tv "$dir" --autocomplete-prompt "$lbuf" --ui-scale 50 --no-status-bar --input "$leftover" < /dev/tty | while IFS= read -r item; do
           item="${item%$suffix}$suffix"
           dirP="$dir/"
           [[ $dirP = "./" ]] && dirP=""
-          echo -n -E "$dirP${(q)item} "
+          selected_path="$dirP$item"
+          print -rn -- "${(q)selected_path} "
         done
       )
       matches=${matches% }
@@ -100,32 +101,34 @@ __tv_path_completion() {
 _tv_smart_autocomplete() {
   _disable_bracketed_paste
 
-  local tokens prefix trigger lbuf
-  setopt localoptions noshwordsplit noksh_arrays noposixbuiltins
+  # Восстанавливаем режим также при пустом вводе, отмене и ошибке completion.
+  {
+    local tokens prefix trigger lbuf
+    setopt localoptions noshwordsplit noksh_arrays noposixbuiltins
 
-  # http://zsh.sourceforge.net/FAQ/zshfaq03.html
-  # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
-  tokens=(${(z)LBUFFER})
-  if [ ${#tokens} -lt 1 ]; then
-    # zle ${fzf_default_completion:-expand-or-complete}
-    __tv_path_completion "" "$LBUFFER"
-    return
-  fi
+    # http://zsh.sourceforge.net/FAQ/zshfaq03.html
+    # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion-Flags
+    tokens=(${(z)LBUFFER})
+    if [ ${#tokens} -lt 1 ]; then
+      __tv_path_completion "" "$LBUFFER"
+      return
+    fi
 
-  [[ ${LBUFFER[-1]} == ' ' ]] && tokens+=("")
+    [[ ${LBUFFER[-1]} == ' ' ]] && tokens+=("")
 
-  if [[ ${LBUFFER} = *"${tokens[-2]-}${tokens[-1]}" ]]; then
-    tokens[-2]="${tokens[-2]-}${tokens[-1]}"
-    tokens=(${tokens[0,-2]})
-  fi
+    if [[ ${LBUFFER} = *"${tokens[-2]-}${tokens[-1]}" ]]; then
+      tokens[-2]="${tokens[-2]-}${tokens[-1]}"
+      tokens=(${tokens[0,-2]})
+    fi
 
-  lbuf=$LBUFFER
-  prefix=${tokens[-1]}
-  [ -n "${tokens[-1]}" ] && lbuf=${lbuf:0:-${#tokens[-1]}}
+    lbuf=$LBUFFER
+    prefix=${tokens[-1]}
+    [ -n "${tokens[-1]}" ] && lbuf=${lbuf:0:-${#tokens[-1]}}
 
-  __tv_path_completion "$prefix" "$lbuf"
-
-  _enable_bracketed_paste
+    __tv_path_completion "$prefix" "$lbuf"
+  } always {
+    _enable_bracketed_paste
+  }
 }
 
 zle -N tv-smart-autocomplete _tv_smart_autocomplete

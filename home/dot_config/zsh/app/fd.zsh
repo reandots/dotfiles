@@ -16,12 +16,12 @@ alias fdx='command fd --hidden --type x --exclude .git'
 # Поиск во всех файлах без любых ограничений
 alias fdall='command fd --unrestricted'
 
-# Поиск во всех файлах относительно корня системы
-# без любых ограничений
-# исключить заведомо ненужные директории
+# Поиск от /, включая скрытые и игнорируемые файлы, кроме каталогов ниже.
+# Шаблон необязателен; -x/-X передаются fd без дополнительных операндов.
 fdroot() {
     command fd \
         --unrestricted \
+        --search-path / \
         --exclude '/proc' \
         --exclude '/sys' \
         --exclude '/dev' \
@@ -29,5 +29,5 @@ fdroot() {
         --exclude '/mnt' \
         --exclude '/nix' \
         --exclude '/var/run' \
-        "$@" /
+        "$@"
 }

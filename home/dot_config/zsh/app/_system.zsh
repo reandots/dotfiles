@@ -129,7 +129,7 @@ _sctl_needs_sudo() {
             --now|--dry-run|--quiet|--verbose|--no-warn|--wait|--no-block|--no-wall|\
             --no-reload|--no-pager|--no-ask-password|--runtime|--force|\
             --firmware-setup|--kernel-cmdline-reuse|--plain|--read-only|--mkdir|\
-            --marked|--stdin)
+            --marked|--stdin|--fail)
                 ;;
             --*)
                 option="${arg%%=*}"
@@ -168,8 +168,10 @@ _sctl_needs_sudo() {
         esac
     done
 
+    # Включаем алиасы systemctl: condrestart и force-reload тоже меняют состояние.
     case "${positional[1]}" in
         start|stop|restart|reload|try-restart|reload-or-restart|try-reload-or-restart|\
+        condrestart|force-reload|\
         enable|disable|reenable|preset|preset-all|mask|unmask|link|revert|\
         add-wants|add-requires|edit|set-default|reset-failed|daemon-reload|\
         daemon-reexec|isolate|kill|clean|freeze|thaw|set-property|bind|mount-image|\
