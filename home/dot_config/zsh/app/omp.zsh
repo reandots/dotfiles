@@ -89,4 +89,5 @@ _omp() (
 alias ocfg='_omp cfg --sandbox profile-cfg'
 alias owork='_omp work --sandbox profile-work'
 alias ohome='_omp home --sandbox profile-home'
+alias odotm='_omp dotm --sandbox profile-dotm'
 alias omp='_omp host'

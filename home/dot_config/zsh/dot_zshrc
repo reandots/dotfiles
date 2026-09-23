@@ -16,6 +16,9 @@ source "$ZSH_LIB_DIR/prompt.zsh"
 source "$ZSH_LIB_DIR/key_bindings.zsh"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+# Override Atuin's setup from app/main.zsh: native history first, then Atuin.
+# Native history includes commands excluded from Atuin's history_filter.
+ZSH_AUTOSUGGEST_STRATEGY=(history atuin)
 export ANTIDOTE_HOME="$ZSH_DATA_DIR/plugins"
 zstyle ':antidote:bundle' file "$ZSH_CONFIG_DIR/plugins.txt"
 zstyle ':antidote:static' file "$ZSH_CACHE_DIR/plugins.zsh"
