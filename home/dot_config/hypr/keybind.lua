@@ -79,9 +79,9 @@ return function(config)
     -- После выбора возвращаемся к обычным биндам; Escape отменяет выбор режима
     hl.bind(mainMod .. " + S", hl.dsp.submap(screenshot))
     hl.define_submap(screenshot, "reset", function()
-        hl.bind("Q", hl.dsp.exec_cmd('notify-send "Screenshot area" & ' .. screenshot .. " --area"))
-        hl.bind("W", hl.dsp.exec_cmd('notify-send "Screenshot window" & ' .. screenshot .. " --window"))
-        hl.bind("E", hl.dsp.exec_cmd('notify-send "Screenshot screen" & ' .. screenshot .. " --screen"))
+        hl.bind("Q", hl.dsp.exec_cmd(screenshot .. " --area"))
+        hl.bind("W", hl.dsp.exec_cmd(screenshot .. " --window"))
+        hl.bind("E", hl.dsp.exec_cmd(screenshot .. " --screen"))
         hl.bind("ESCAPE", hl.dsp.submap("reset"))
     end)
 

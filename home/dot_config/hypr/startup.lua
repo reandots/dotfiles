@@ -19,8 +19,8 @@ return function(config)
         hl.exec_cmd(config.terminal, { workspace = "2 silent", no_anim = true })
         hl.exec_cmd("code", { workspace = "3 silent", no_anim = true })
 
-        -- Панель\оболочка
-        hl.exec_cmd("auto_ags")
+        -- Панель Noctalia
+        hl.exec_cmd("noctalia")
 
         -- Столы 1–7 создаются правилами persistent в workspaces.lua; при входе выбираем первый
         hl.dispatch(hl.dsp.focus({ workspace = 1 }))

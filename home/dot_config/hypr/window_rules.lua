@@ -9,11 +9,11 @@ hl.window_rule({ match = { class = "^(pavucontrol)$" }, float = true })
 hl.window_rule({ match = { class = [[^(org\.gnome\.Meld)$]] }, maximize = true })
 hl.window_rule({ match = { class = "^(waypaper)$" }, float = true })
 
--- Новые окна VS Code направлять на рабочий стол разработки
-hl.window_rule({ match = { class = "^(code)$" }, workspace = "3" })
+-- VS Code: Wayland-класс com.microsoft.VSCode и XWayland-класс code; новые окна на devel
+hl.window_rule({ match = { class = [[^(code|com\.microsoft\.VSCode)$]] }, workspace = "3" })
 
 -- Плавающие диалоги: одновременно должны совпасть класс приложения и заголовок
-hl.window_rule({ match = { class = "^(code)$", title = "^(Save As|Open File|Open Folder|Open)$" }, float = true })
+hl.window_rule({ match = { class = [[^(code|com\.microsoft\.VSCode)$]], title = "^(Save As|Open File|Open Folder|Open)$" }, float = true })
 hl.window_rule({ match = { class = "^(doublecmd)$", title = "^(Поиск файлов|~/.*|/.*)$" }, float = true })
 hl.window_rule({ match = { class = "^(terminator)$", title = "^(Терминатор Параметры|Настройки)$" }, float = true })
 
