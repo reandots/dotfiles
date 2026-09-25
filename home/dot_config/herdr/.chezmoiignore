@@ -1,6 +1,7 @@
 *.log
 .plugins.lock
 plugins.json
+sessions
 session.json
 session-snapshots
 session-snapshots/**
