@@ -17,7 +17,7 @@ CHROMIUM_FLAGS=(
     --disk-cache-dir="${CACHE_DIR}"
     --proxy-bypass-list="localhost,127.0.0.1,[::1]"
     --lang="${LANG_TAG}"
-    --accept-lang="ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+    --accept-lang="ru-RU,ru,en-US,en" # Language tags only; Chromium adds HTTP q-values.
     --class="chromium_work"
     # disable main profile sync
     --disable-sync

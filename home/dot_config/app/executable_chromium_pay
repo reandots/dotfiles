@@ -45,7 +45,7 @@ CHROMIUM_FLAGS=(
     # DNS leak kill-switch
     --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE localhost , EXCLUDE 127.0.0.1 , EXCLUDE [::1]"
     --lang="${LANG_TAG}"
-    --accept-lang="en-US,en;q=0.9"
+    --accept-lang="en-US,en"
     --class="chromium_pay"
     # disable main profile sync
     --disable-sync
